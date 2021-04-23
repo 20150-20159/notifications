@@ -6,12 +6,13 @@ use App\Mail\RegistrationSuccess;
 use App\Mail\RequestSuccess;
 use App\Mail\SubmissionRequest;
 use App\Models\Notification;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
 class NotificationController extends Controller
 {
-    public function sendRegistrationSuccess(Request $request)
+    public function sendRegistrationSuccess(Request $request): JsonResponse
     {
         $user_name = $request->input('name');
         $user_to = $request->input('to');
@@ -26,7 +27,7 @@ class NotificationController extends Controller
         return response()->json('Success');
     }
 
-    public function sendSubmissionRequest(Request $request)
+    public function sendSubmissionRequest(Request $request): JsonResponse
     {
         $user_name = $request->input('name');
         $user_to = $request->input('to');
@@ -41,7 +42,7 @@ class NotificationController extends Controller
         return response()->json('Success');
     }
 
-    public function sendRequestSuccess(Request $request)
+    public function sendRequestSuccess(Request $request): JsonResponse
     {
         $user_name = $request->input('name');
         $user_to = $request->input('to');
