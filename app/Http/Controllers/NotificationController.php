@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Mail\RegistrationSuccess;
-use App\Mail\RequestSuccess;
-use App\Mail\SubmissionRequest;
+use App\Jobs\SendRegistrationSuccess;
+use App\Jobs\SendRequestSubmissionRequest;
+use App\Jobs\SendRequestSuccess;
 use App\Models\Notification;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
 
 class NotificationController extends Controller
 {
@@ -17,7 +16,7 @@ class NotificationController extends Controller
         $user_name = $request->input('name');
         $user_to = $request->input('to');
 
-        Mail::to($user_to)->send(new RegistrationSuccess($user_name));
+        SendRegistrationSuccess::dispatch($user_to, $user_name);
 
         $notification = new Notification();
         $notification->to = $user_to;
@@ -32,7 +31,7 @@ class NotificationController extends Controller
         $user_name = $request->input('name');
         $user_to = $request->input('to');
 
-        Mail::to($user_to)->send(new SubmissionRequest($user_name));
+        SendRequestSubmissionRequest::dispatch($user_to, $user_name);
 
         $notification = new Notification();
         $notification->to = $user_to;
@@ -47,7 +46,7 @@ class NotificationController extends Controller
         $user_name = $request->input('name');
         $user_to = $request->input('to');
 
-        Mail::to($user_to)->send(new RequestSuccess($user_name));
+        SendRequestSuccess::dispatch($user_to, $user_name);
 
         $notification = new Notification();
         $notification->to = $user_to;
