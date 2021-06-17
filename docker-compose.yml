@@ -11,6 +11,18 @@ services:
     volumes:
       - 'redis_data:/bitnami/redis/data'
 
+  node-red:
+    network_mode: host
+    image: nodered/node-red:latest
+    environment:
+      - TZ=Europe/Amsterdam
+    ports:
+      - "1880:1880"
+    volumes:
+      - node-red-data:/data
+
 volumes:
   redis_data:
     driver: local
+
+  node-red-data:
