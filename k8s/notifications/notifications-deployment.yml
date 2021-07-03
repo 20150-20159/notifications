@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: notifications-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: notifications
+      app: myappnotifications
+  template:
+    metadata:
+      labels:
+        component: notifications
+        app: myappnotifications
+    spec:
+      containers:
+        - name: notifications
+          image: 'mitsosf/notifications:2.0.0'
+          #command: ["php","artisan","queue:work","&"]
+          ports:
+            - containerPort: 80
+          imagePullPolicy: Always

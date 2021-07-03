@@ -17,3 +17,4 @@ use Illuminate\Support\Facades\Route;
 Route::post('/registrationSuccess', [NotificationController::class, 'sendRegistrationSuccess']);
 Route::post('/submissionRequest', [NotificationController::class, 'sendSubmissionRequest']);
 Route::post('/requestSuccess', [NotificationController::class, 'sendRequestSuccess']);
+Route::post('/requestReject', [NotificationController::class, 'sendRequestReject']);

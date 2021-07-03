@@ -1,0 +1,6 @@
+<p>Dear {{$name}},</p>
+<br>
+<p>Your Real Estate Transfer Request has been rejected.</p>
+<br>
+<p>Kind regards,</p>
+<p>The Real Estate Transfer Team</p>

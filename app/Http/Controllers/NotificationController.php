@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Jobs\SendRegistrationSuccess;
+use App\Jobs\SendRequestReject;
 use App\Jobs\SendRequestSubmissionRequest;
 use App\Jobs\SendRequestSuccess;
 use App\Models\Notification;
@@ -51,6 +52,21 @@ class NotificationController extends Controller
         $notification = new Notification();
         $notification->to = $user_to;
         $notification->subject = '[Completed] Real Estate Transfer Request';
+        $notification->save();
+
+        return response()->json('Success');
+    }
+
+    public function sendRequestReject(Request $request): JsonResponse
+    {
+        $user_name = $request->input('name');
+        $user_to = $request->input('to');
+
+        SendRequestReject::dispatch($user_to, $user_name);
+
+        $notification = new Notification();
+        $notification->to = $user_to;
+        $notification->subject = '[Rejected] Real Estate Transfer Request';
         $notification->save();
 
         return response()->json('Success');
